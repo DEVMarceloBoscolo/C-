@@ -1,0 +1,208 @@
+Console.WriteLine("-----Pizzaria_MB-------");
+
+        string tamanhoPizza = "";
+        string tipoMassa = "";
+        string saborPizza = "";
+        double precoTotal = 0;
+        double precoExtras = 0;
+        string[] extrasSelecionados = new string[4];
+        int extrasContador = 0;
+
+        const double precoPequena = 20.00;
+        const double precoMedia = 30.00;
+        const double precoGrande = 40.00;
+        const double precoGigante = 50.00;
+        const double precoAdicionalExtra = 3.50;
+
+        while (string.IsNullOrEmpty(tamanhoPizza))
+        {
+            Console.WriteLine("\nSelecione o tamanho da pizza:");
+            Console.WriteLine($"1: Pequena 15cm (R$ {precoPequena:F2})");
+            Console.WriteLine($"2: Média 25cm (R$ {precoMedia:F2})");
+            Console.WriteLine($"3: Grande 35cm (R$ {precoGrande:F2})");
+            Console.WriteLine($"4: Gigante 55cm (R$ {precoGigante:F2})");
+            Console.Write("Digite sua opção: ");
+            if (int.TryParse(Console.ReadLine(), out int opcaoTamanho))
+            {
+                switch ((TamanhoPizza)opcaoTamanho)
+                {
+                    case TamanhoPizza.Pequena:
+                        tamanhoPizza = "Pequena 15cm";
+                        precoTotal += precoPequena;
+                        break;
+                    case TamanhoPizza.Media:
+                        tamanhoPizza = "Média 25cm";
+                        precoTotal += precoMedia;
+                        break;
+                    case TamanhoPizza.Grande:
+                        tamanhoPizza = "Grande 35cm";
+                        precoTotal += precoGrande;
+                        break;
+                    case TamanhoPizza.Gigante:
+                        tamanhoPizza = "Gigante 55cm";
+                        precoTotal += precoGigante;
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida. Por favor, digite um número.");
+            }
+        }
+
+        while (string.IsNullOrEmpty(tipoMassa))
+        {
+            Console.WriteLine("\nSelecione o tipo de massa:");
+            Console.WriteLine("1: Tradicional");
+            Console.WriteLine("2: Integral");
+            Console.WriteLine("3: Pan");
+            Console.Write("Digite sua opção: ");
+            if (int.TryParse(Console.ReadLine(), out int opcaoMassa))
+            {
+                switch ((TipoMassa)opcaoMassa)
+                {
+                    case TipoMassa.Tradicional:
+                        tipoMassa = "Tradicional";
+                        break;
+                    case TipoMassa.Integral:
+                        tipoMassa = "Integral";
+                        break;
+                    case TipoMassa.Pan:
+                        tipoMassa = "Pan";
+                        break;
+                    default:
+                        Console.WriteLine("Opção de massa inválida. Tente novamente.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida. Por favor, digite um número.");
+            }
+        }
+
+        while (string.IsNullOrEmpty(saborPizza))
+        {
+            Console.WriteLine("\nSelecione o sabor da pizza:");
+            Console.WriteLine("1: Portuguesa");
+            Console.WriteLine("2: Calabresa");
+            Console.WriteLine("3: Marguerita");
+            Console.WriteLine("4: Pepperoni");
+            Console.WriteLine("5: Atum");
+            Console.WriteLine("6: Brócolis");
+            Console.Write("Digite sua opção: ");
+            if (int.TryParse(Console.ReadLine(), out int opcaoSabor))
+            {
+                switch ((SaborPizza)opcaoSabor)
+                {
+                    case SaborPizza.Portuguesa:
+                        saborPizza = "Portuguesa";
+                        break;
+                    case SaborPizza.Calabresa:
+                        saborPizza = "Calabresa";
+                        break;
+                    case SaborPizza.Marguerita:
+                        saborPizza = "Marguerita";
+                        break;
+                    case SaborPizza.Pepperoni:
+                        saborPizza = "Pepperoni";
+                        break;
+                    case SaborPizza.Atum:
+                        saborPizza = "Atum";
+                        break;
+                    case SaborPizza.Brocolis:
+                        saborPizza = "Brócolis";
+                        break;
+                    default:
+                        Console.WriteLine("Opção de sabor inválida. Tente novamente.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida. Por favor, digite um número.");
+            }
+        }
+
+        Console.WriteLine("\nDeseja adicionar ingredientes extras? (máximo 4)");
+        Console.WriteLine($"Cada extra custa R$ {precoAdicionalExtra:F2}");
+        while (extrasContador < 4)
+        {
+            Console.WriteLine("\nExtras disponíveis:");
+            Console.WriteLine("1: Borda recheada");
+            Console.WriteLine("2: Bacon");
+            Console.WriteLine("3: Azeite trufado");
+            Console.WriteLine("4: Champignon");
+            Console.WriteLine("5: Nenhum extra (para terminar)");
+            Console.Write("Digite sua opção: ");
+            if (int.TryParse(Console.ReadLine(), out int opcaoExtra))
+            {
+                if (opcaoExtra >= 1 && opcaoExtra <= 4)
+                {
+                    switch ((Extra)opcaoExtra)
+                    {
+                        case Extra.BordaRecheada:
+                            extrasSelecionados[extrasContador] = "Borda recheada";
+                            break;
+                        case Extra.Bacon:
+                            extrasSelecionados[extrasContador] = "Bacon";
+                            break;
+                        case Extra.AzeiteTrufado:
+                            extrasSelecionados[extrasContador] = "Azeite trufado";
+                            break;
+                        case Extra.Champignon:
+                            extrasSelecionados[extrasContador] = "Champignon";
+                            break;
+                    }
+                    extrasContador++;
+                    precoExtras += precoAdicionalExtra;
+                    Console.WriteLine($"{extrasSelecionados[extrasContador - 1]} adicionado! Você tem {extrasContador} extra(s).");
+                }
+                else if (opcaoExtra == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Opção de extra inválida. Tente novamente.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida. Por favor, digite um número.");
+            }
+        }
+        if (extrasContador == 4)
+        {
+            double desconto = precoExtras * 0.15;
+            precoExtras -= desconto;
+            Console.WriteLine("\nPARABÉNS! Você adicionou 4 extras e ganhou 15% de desconto!");
+        }
+
+        precoTotal += precoExtras;
+
+        
+        Console.WriteLine("\n-----------------------------");
+        Console.WriteLine("Resumo do seu pedido:");
+        Console.WriteLine($"Tamanho: {tamanhoPizza}");
+        Console.WriteLine($"Massa: {tipoMassa}");
+        Console.WriteLine($"Sabor: {saborPizza}");
+        Console.WriteLine("Ingredientes extras:");
+        if (extrasContador > 0)
+        {
+            for (int i = 0; i < extrasContador; i++)
+            {
+                Console.WriteLine($"- {extrasSelecionados[i]}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("- Nenhum");
+        }
+        Console.WriteLine("-----------------------------");
+        Console.WriteLine($"Subtotal extras: R$ {precoExtras:F2}");
+        Console.WriteLine($"Total do pedido: R$ {precoTotal:F2}");
+        Console.WriteLine("-----------------------------");
